@@ -16,7 +16,7 @@ export interface GameStats {
   score: number;
   correctAnswers: number;
   wrongAnswers: number;
-  averageTime: number;
+  totalTime: number;
   questions: Question[];
   startTime: number;
   endTime?: number;

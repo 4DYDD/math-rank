@@ -44,19 +44,22 @@ export const generateQuestion = (id: number): Question => {
   };
 };
 
-export const calculateScore = (questions: Question[]): GameStats => {
+export const calculateScore = (
+  questions: Question[],
+  startTime: number
+): GameStats => {
   const correctAnswers = questions.filter((q) => q.isCorrect).length;
-  const totalTime = questions.reduce((acc, q) => acc + (q.timeSpent || 0), 0);
-  const averageTime = questions.length > 0 ? totalTime / questions.length : 0;
+  const endTime = Date.now();
+  const totalTime = endTime - startTime;
 
   return {
     score: correctAnswers * 10,
     correctAnswers,
     wrongAnswers: questions.length - correctAnswers,
-    averageTime,
+    totalTime,
     questions,
-    startTime: questions[0]?.timeSpent || Date.now(),
-    endTime: Date.now(),
+    startTime,
+    endTime,
   };
 };
 
